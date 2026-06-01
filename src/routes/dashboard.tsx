@@ -24,13 +24,13 @@ type Job = {
 };
 
 const DEMO: Job[] = [
-  { id: "1", title: "Senior Product Manager", company: "Careem", location: "Dubai", platform: "LinkedIn", url: "#", salary: "AED 35,000 / mo", posted_at: "2d ago", match_score: 94 },
-  { id: "2", title: "Marketing Director — MENA", company: "Noon", location: "Dubai", platform: "Bayt", url: "#", salary: "AED 40,000 / mo", posted_at: "1d ago", match_score: 88 },
-  { id: "3", title: "Data Scientist", company: "G42", location: "Abu Dhabi", platform: "LinkedIn", url: "#", salary: null, posted_at: "5h ago", match_score: 82 },
-  { id: "4", title: "Regional Sales Manager", company: "Property Finder", location: "Dubai", platform: "Naukrigulf", url: "#", salary: "AED 28,000 / mo", posted_at: "3d ago", match_score: 76 },
-  { id: "5", title: "UX Designer", company: "Talabat", location: "Dubai", platform: "GulfTalent", url: "#", salary: null, posted_at: "1d ago", match_score: 71 },
-  { id: "6", title: "Customer Success Lead", company: "Sarwa", location: "Dubai", platform: "Indeed", url: "#", salary: "AED 22,000 / mo", posted_at: "4h ago", match_score: 65 },
-  { id: "7", title: "Junior Accountant", company: "ADIB", location: "Abu Dhabi", platform: "Bayt", url: "#", salary: null, posted_at: "1w ago", match_score: 54 },
+  { id: "1", title: "Senior Product Manager", company: "Example Co.", location: "UAE", platform: "Trusted source", url: "#", salary: "AED 35,000 / mo", posted_at: "2d ago", match_score: 94 },
+  { id: "2", title: "Marketing Director — MENA", company: "Example Co.", location: "UAE", platform: "Trusted source", url: "#", salary: "AED 40,000 / mo", posted_at: "1d ago", match_score: 88 },
+  { id: "3", title: "Data Scientist", company: "Example Co.", location: "UAE", platform: "Trusted source", url: "#", salary: null, posted_at: "5h ago", match_score: 82 },
+  { id: "4", title: "Regional Sales Manager", company: "Example Co.", location: "UAE", platform: "Trusted source", url: "#", salary: "AED 28,000 / mo", posted_at: "3d ago", match_score: 76 },
+  { id: "5", title: "UX Designer", company: "Example Co.", location: "UAE", platform: "Trusted source", url: "#", salary: null, posted_at: "1d ago", match_score: 71 },
+  { id: "6", title: "Customer Success Lead", company: "Example Co.", location: "UAE", platform: "Trusted source", url: "#", salary: "AED 22,000 / mo", posted_at: "4h ago", match_score: 65 },
+  { id: "7", title: "Junior Accountant", company: "Example Co.", location: "UAE", platform: "Trusted source", url: "#", salary: null, posted_at: "1w ago", match_score: 54 },
 ];
 
 function Dashboard() {

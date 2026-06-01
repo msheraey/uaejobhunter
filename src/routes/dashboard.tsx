@@ -121,10 +121,10 @@ function Dashboard() {
             </SelectContent>
           </Select>
           <Select value={platform} onValueChange={setPlatform}>
-            <SelectTrigger className="w-[160px]"><SelectValue /></SelectTrigger>
+            <SelectTrigger className="w-[180px]"><SelectValue /></SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All platforms</SelectItem>
-              {["LinkedIn","Indeed","Bayt","Naukrigulf","GulfTalent"].map(p => <SelectItem key={p} value={p}>{p}</SelectItem>)}
+              <SelectItem value="all">All sources</SelectItem>
+              <SelectItem value="Trusted source">Trusted sources only</SelectItem>
             </SelectContent>
           </Select>
         </Card>

@@ -38,18 +38,34 @@ function Signup() {
   }, []);
 
   const toggleTitle = (t: string) => {
-    setTitles((cur) => cur.includes(t) ? cur.filter(x => x !== t) : cur.length >= 5 ? (toast.error("Max 5 titles"), cur) : [...cur, t]);
+    setTitles((cur) => {
+      if (cur.includes(t)) return cur.filter(x => x !== t);
+      if (cur.length >= 5) { toast.error("You can select up to 5 titles"); return cur; }
+      return [...cur, t];
+    });
+  };
+
+  const validateCustomTitle = (raw: string): string | null => {
+    const t = raw.trim();
+    if (t.length < 3) return "Title must be at least 3 characters";
+    if (t.length > 60) return "Title must be 60 characters or fewer";
+    if (!/[A-Za-z]{2,}/.test(t)) return "Please enter a real job title";
+    if (!/^[A-Za-z0-9 &/\-(),.+'’]+$/.test(t)) return "Please enter a real job title";
+    return null;
   };
 
   const addCustom = () => {
     const t = titleQ.trim();
     if (!t) return;
-    if (titles.length >= 5) { toast.error("Max 5 titles"); return; }
+    if (titles.length >= 5) { toast.error("You can select up to 5 titles"); return; }
+    const err = validateCustomTitle(t);
+    if (err) { toast.error(err); return; }
     if (!titles.includes(t)) setTitles([...titles, t]);
     setTitleQ("");
   };
 
   const filtered = pool.filter(t => t.toLowerCase().includes(titleQ.toLowerCase()) && !titles.includes(t)).slice(0, 12);
+  const atMax = titles.length >= 5;
 
   const submit = async () => {
     if (titles.length === 0) { toast.error("Pick at least one title"); return; }

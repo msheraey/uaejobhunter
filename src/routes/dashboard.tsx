@@ -63,7 +63,7 @@ function Dashboard() {
   };
 
   const tailorCV = (job: Job) => {
-    toast.success(`Tailored CV for ${job.title} is on its way to your inbox ✨`);
+    toast.success(`Tailored CV + cover letter for ${job.title} will be emailed to you in under a minute ✨`);
   };
 
   const filtered = useMemo(() => jobs

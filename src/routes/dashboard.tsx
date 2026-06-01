@@ -90,7 +90,7 @@ function Dashboard() {
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col sm:flex-row justify-between gap-4 items-start sm:items-center">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold">Welcome back, {fullName} 👋</h1>
-            <p className="text-sm text-muted-foreground mt-1">Here's what we found for you today.</p>
+            <p className="text-sm text-muted-foreground mt-1">Your matches will appear shortly — popular roles are ready instantly, new ones may take a little time to gather.</p>
           </div>
           <Button onClick={runMatches} disabled={running} size="lg" className="bg-gradient-brand text-primary-foreground shadow-elegant">
             <RefreshCw className={`w-4 h-4 mr-2 ${running ? "animate-spin" : ""}`} />

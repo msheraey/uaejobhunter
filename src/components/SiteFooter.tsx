@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Logo } from "./SiteHeader";
 import { Twitter, Linkedin, Instagram, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,7 +20,7 @@ export function SiteFooter() {
         </div>
         <FooterCol title="Product" links={[["How it works","/#how"],["Features","/#features"],["Pricing","/#pricing"],["FAQ","/#faq"]]} />
         <FooterCol title="Company" links={[["About","#"],["Blog","#"],["Careers","#"],["Contact","#"]]} />
-        <FooterCol title="Legal" links={[["Privacy","#"],["Terms","#"],["Cookies","#"]]} />
+        <FooterCol title="Legal" links={[["Privacy","/privacy"],["Terms","/terms"],["Cookies","/cookies"]]} />
       </div>
       <div className="border-t border-border">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -41,7 +42,13 @@ function FooterCol({ title, links }: { title: string; links: [string, string][] 
       <h4 className="font-semibold text-sm mb-3">{title}</h4>
       <ul className="space-y-2 text-sm text-muted-foreground">
         {links.map(([label, href]) => (
-          <li key={label}><a href={href} className="hover:text-foreground transition">{label}</a></li>
+          <li key={label}>
+            {href.startsWith("/") && !href.startsWith("/#") ? (
+              <Link to={href} className="hover:text-foreground transition">{label}</Link>
+            ) : (
+              <a href={href} className="hover:text-foreground transition">{label}</a>
+            )}
+          </li>
         ))}
       </ul>
     </div>

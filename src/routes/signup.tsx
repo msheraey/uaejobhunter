@@ -38,18 +38,34 @@ function Signup() {
   }, []);
 
   const toggleTitle = (t: string) => {
-    setTitles((cur) => cur.includes(t) ? cur.filter(x => x !== t) : cur.length >= 5 ? (toast.error("Max 5 titles"), cur) : [...cur, t]);
+    setTitles((cur) => {
+      if (cur.includes(t)) return cur.filter(x => x !== t);
+      if (cur.length >= 5) { toast.error("You can select up to 5 titles"); return cur; }
+      return [...cur, t];
+    });
+  };
+
+  const validateCustomTitle = (raw: string): string | null => {
+    const t = raw.trim();
+    if (t.length < 3) return "Title must be at least 3 characters";
+    if (t.length > 60) return "Title must be 60 characters or fewer";
+    if (!/[A-Za-z]{2,}/.test(t)) return "Please enter a real job title";
+    if (!/^[A-Za-z0-9 &/\-(),.+'’]+$/.test(t)) return "Please enter a real job title";
+    return null;
   };
 
   const addCustom = () => {
     const t = titleQ.trim();
     if (!t) return;
-    if (titles.length >= 5) { toast.error("Max 5 titles"); return; }
+    if (titles.length >= 5) { toast.error("You can select up to 5 titles"); return; }
+    const err = validateCustomTitle(t);
+    if (err) { toast.error(err); return; }
     if (!titles.includes(t)) setTitles([...titles, t]);
     setTitleQ("");
   };
 
   const filtered = pool.filter(t => t.toLowerCase().includes(titleQ.toLowerCase()) && !titles.includes(t)).slice(0, 12);
+  const atMax = titles.length >= 5;
 
   const submit = async () => {
     if (titles.length === 0) { toast.error("Pick at least one title"); return; }
@@ -128,7 +144,7 @@ function Signup() {
                 </Step>
               )}
               {step === 4 && (
-                <Step title="Pick your target roles" subtitle="Choose up to 5. Add custom ones if yours isn't listed.">
+                <Step title="Pick your target roles" subtitle="Choose up to 5. Prefer the suggested list — add a custom title only if yours isn't there.">
                   <div className="flex flex-wrap gap-2 mb-3 min-h-[2.5rem]">
                     {titles.map(t => (
                       <Badge key={t} className="bg-gradient-brand text-primary-foreground gap-1 pl-3">
@@ -138,21 +154,26 @@ function Signup() {
                     {titles.length === 0 && <p className="text-xs text-muted-foreground">No titles selected yet</p>}
                   </div>
                   <div className="flex gap-2">
-                    <Input value={titleQ} onChange={e => setTitleQ(e.target.value)} onKeyDown={e => e.key === "Enter" && (e.preventDefault(), addCustom())} placeholder="Search or add custom title" />
-                    <Button type="button" onClick={addCustom} variant="outline">Add</Button>
+                    <Input value={titleQ} onChange={e => setTitleQ(e.target.value)} maxLength={60} disabled={atMax} onKeyDown={e => e.key === "Enter" && (e.preventDefault(), addCustom())} placeholder={atMax ? "You can select up to 5 titles" : "Search or add custom title"} />
+                    <Button type="button" onClick={addCustom} variant="outline" disabled={atMax}>Add</Button>
                   </div>
                   <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto">
                     {filtered.map(t => (
-                      <button key={t} onClick={() => toggleTitle(t)} className="px-3 py-1 text-xs rounded-full border border-border hover:border-primary hover:bg-primary/5 transition">
+                      <button key={t} onClick={() => toggleTitle(t)} disabled={atMax} className="px-3 py-1 text-xs rounded-full border border-border hover:border-primary hover:bg-primary/5 transition disabled:opacity-40 disabled:cursor-not-allowed">
                         + {t}
                       </button>
                     ))}
                   </div>
-                  <p className="text-xs text-muted-foreground">{titles.length}/5 selected</p>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <span>{titles.length}/5 selected</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground bg-muted/50 rounded-md px-3 py-2">
+                    ✨ New titles may take a short while to populate with jobs.
+                  </p>
                 </Step>
               )}
               {step === 5 && (
-                <Step title="Ready to hunt?" subtitle="We'll start scanning jobs and email your first matches within 24 hours.">
+                <Step title="Ready to hunt?" subtitle="Your matches will appear shortly — popular roles are ready instantly, new ones may take a little time to gather.">
                   <div className="space-y-2 text-sm">
                     <Row label="Email" value={email} />
                     <Row label="Phone" value={phone} />

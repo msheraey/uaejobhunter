@@ -24,13 +24,13 @@ type Job = {
 };
 
 const DEMO: Job[] = [
-  { id: "1", title: "Senior Product Manager", company: "Careem", location: "Dubai", platform: "LinkedIn", url: "#", salary: "AED 35,000 / mo", posted_at: "2d ago", match_score: 94 },
-  { id: "2", title: "Marketing Director — MENA", company: "Noon", location: "Dubai", platform: "Bayt", url: "#", salary: "AED 40,000 / mo", posted_at: "1d ago", match_score: 88 },
-  { id: "3", title: "Data Scientist", company: "G42", location: "Abu Dhabi", platform: "LinkedIn", url: "#", salary: null, posted_at: "5h ago", match_score: 82 },
-  { id: "4", title: "Regional Sales Manager", company: "Property Finder", location: "Dubai", platform: "Naukrigulf", url: "#", salary: "AED 28,000 / mo", posted_at: "3d ago", match_score: 76 },
-  { id: "5", title: "UX Designer", company: "Talabat", location: "Dubai", platform: "GulfTalent", url: "#", salary: null, posted_at: "1d ago", match_score: 71 },
-  { id: "6", title: "Customer Success Lead", company: "Sarwa", location: "Dubai", platform: "Indeed", url: "#", salary: "AED 22,000 / mo", posted_at: "4h ago", match_score: 65 },
-  { id: "7", title: "Junior Accountant", company: "ADIB", location: "Abu Dhabi", platform: "Bayt", url: "#", salary: null, posted_at: "1w ago", match_score: 54 },
+  { id: "1", title: "Senior Product Manager", company: "Example Co.", location: "UAE", platform: "Trusted source", url: "#", salary: "AED 35,000 / mo", posted_at: "2d ago", match_score: 94 },
+  { id: "2", title: "Marketing Director — MENA", company: "Example Co.", location: "UAE", platform: "Trusted source", url: "#", salary: "AED 40,000 / mo", posted_at: "1d ago", match_score: 88 },
+  { id: "3", title: "Data Scientist", company: "Example Co.", location: "UAE", platform: "Trusted source", url: "#", salary: null, posted_at: "5h ago", match_score: 82 },
+  { id: "4", title: "Regional Sales Manager", company: "Example Co.", location: "UAE", platform: "Trusted source", url: "#", salary: "AED 28,000 / mo", posted_at: "3d ago", match_score: 76 },
+  { id: "5", title: "UX Designer", company: "Example Co.", location: "UAE", platform: "Trusted source", url: "#", salary: null, posted_at: "1d ago", match_score: 71 },
+  { id: "6", title: "Customer Success Lead", company: "Example Co.", location: "UAE", platform: "Trusted source", url: "#", salary: "AED 22,000 / mo", posted_at: "4h ago", match_score: 65 },
+  { id: "7", title: "Junior Accountant", company: "Example Co.", location: "UAE", platform: "Trusted source", url: "#", salary: null, posted_at: "1w ago", match_score: 54 },
 ];
 
 function Dashboard() {
@@ -63,7 +63,7 @@ function Dashboard() {
   };
 
   const tailorCV = (job: Job) => {
-    toast.success(`Tailored CV for ${job.title} is on its way to your inbox ✨`);
+    toast.success(`Tailored CV + cover letter for ${job.title} will be emailed to you in under a minute ✨`);
   };
 
   const filtered = useMemo(() => jobs
@@ -90,7 +90,7 @@ function Dashboard() {
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col sm:flex-row justify-between gap-4 items-start sm:items-center">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold">Welcome back, {fullName} 👋</h1>
-            <p className="text-sm text-muted-foreground mt-1">Here's what we found for you today.</p>
+            <p className="text-sm text-muted-foreground mt-1">Your matches will appear shortly — popular roles are ready instantly, new ones may take a little time to gather.</p>
           </div>
           <Button onClick={runMatches} disabled={running} size="lg" className="bg-gradient-brand text-primary-foreground shadow-elegant">
             <RefreshCw className={`w-4 h-4 mr-2 ${running ? "animate-spin" : ""}`} />
@@ -121,10 +121,10 @@ function Dashboard() {
             </SelectContent>
           </Select>
           <Select value={platform} onValueChange={setPlatform}>
-            <SelectTrigger className="w-[160px]"><SelectValue /></SelectTrigger>
+            <SelectTrigger className="w-[180px]"><SelectValue /></SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All platforms</SelectItem>
-              {["LinkedIn","Indeed","Bayt","Naukrigulf","GulfTalent"].map(p => <SelectItem key={p} value={p}>{p}</SelectItem>)}
+              <SelectItem value="all">All sources</SelectItem>
+              <SelectItem value="Trusted source">Trusted sources only</SelectItem>
             </SelectContent>
           </Select>
         </Card>
